@@ -1,0 +1,4 @@
+- Cambiar las fonts de los thumbs para que le gusten a mi amorcito
+- Modificar las paginas de proyectos (layout)
+- Modificar el About.html
+- Hacer que funcione la font
