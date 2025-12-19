@@ -1,7 +1,7 @@
 @font-face {
  font-family: 'Futura';
- src: url('../assets/fonts/futura-book-webfont.woff') format('woff'),
-      url('../assets/fonts/futura-book-webfont.woff2') format('woff2');
+ src: url('../assets/fonts/futura.woff') format('woff'),
+      url('../assets/fonts/futura.woff2') format('woff2');
  font-weight: normal;
  font-style: normal;
 }
@@ -24,20 +24,18 @@ Sidebar Navigation (persistent)
   left: 0;
   top: 0;
   height: 100vh;
-  width: 220px;
-  padding: 3rem 1.5rem;
+  width: 300px;
+  padding: 5rem 5rem 0rem;
   z-index: 100;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  background: #fff;
+  justify-content: flex-start; /* keep nav at the top */
   box-sizing: border-box;
 }
 
 .sidebar__brand {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 4rem;
   text-align: left;
 }
 
@@ -96,10 +94,26 @@ Sidebar Navigation (persistent)
 About
 ======================= */
 .about {
- min-height: 100vh;
- display: flex;
- align-items: center;
- padding: 0 3rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* center vertically on larger screens */
+  padding: 3rem 2rem;
+  box-sizing: border-box;
+}
+
+/* keep title visually at the top while centering the rest */
+.about {
+  position: relative;
+}
+
+.about__title {
+  position: absolute;
+  top: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
 }
 
 .about__content {
@@ -111,15 +125,15 @@ About
 /* About page layout */
 .about__title {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   letter-spacing: 0.12em;
-  margin: 3rem 0 2rem;
+  margin: 1.5rem 0 1rem;
 }
 
 .about__grid {
   display: flex;
   gap: 2.5rem;
-  align-items: center;
+  align-items: stretch;
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 2rem 3rem;
@@ -136,6 +150,11 @@ About
   max-width: 380px;
   font-size: 0.95rem;
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* bottom align content inside the bio cell */
+  align-items: flex-start;    /* left align text */
+  text-align: left;
 }
 
 /* =======================
@@ -177,7 +196,11 @@ Work
   border-radius: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.18s ease;
+  /* stabilize transform and animate both opacity and transform to avoid
+     showing intermediate positioned fragments when overlays appear */
+  transform: translate(0,0) scale(1);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  will-change: opacity, transform;
 }
 
 .work-item__overlay h3 {
@@ -213,7 +236,8 @@ Work
 .work-item:focus-within .work-item__overlay,
 .work-item:focus .work-item__overlay {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  /* keep overlay in place (no shifting). we only animate opacity/scale */
+  transform: translate(0,0) scale(1);
   pointer-events: auto;
 }
 
@@ -314,6 +338,18 @@ Responsive
   .about__bio {
     max-width: none;
   }
+
+  /* On small screens revert about container to top-aligned */
+  .about {
+    justify-content: flex-start;
+  }
+
+  /* on small screens put title back in document flow */
+  .about__title {
+    position: static;
+    transform: none;
+    margin: 1.5rem 0 0.5rem;
+  }
 }
 
 @media (max-width: 600px) {
@@ -352,6 +388,12 @@ Project pages
   color: #666;
 }
 
+/* Put each meta line on its own row */
+.project__meta span {
+  display: block;
+  margin-top: 0.25rem;
+}
+
 .project__hero {
   display: flex;
   gap: 2rem;
@@ -383,6 +425,78 @@ Project pages
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* Flexible project layout: mix full-width media, 2-column grid and text cells */
+
+.project__layout {
+  display: grid;
+  /* Use a 6-column internal grid so we can map the original 2-column layout
+     while allowing finer control for 3-up rows. Default image spans 3 cols
+     (equivalent to the previous 1 of 2). */
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  align-items: stretch;
+  grid-auto-rows: auto;
+}
+
+.project__layout .media {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* default: occupy half-width (3 of 6 columns) */
+  grid-column: span 3;
+}
+
+/* helper: make three adjacent images fit in a single row.
+   Add `three` to the `media` element: <img class="media three" ...> */
+.project__layout .media.three {
+  grid-column: span 2; /* three items x 2 = 6 columns */
+}
+
+/* full-width media (keep existing behaviour) */
+.project__layout .media.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Each grid cell can be a wrapper to allow vertical alignment */
+.project__cell {
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* allow children to shrink properly */
+}
+
+/* Full-width wrapper - spans both columns */
+.project__cell.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Make an item span both columns (use on images that should be full width) */
+.project__layout .full-width {
+  grid-column: 1 / -1;
+  display: block;
+}
+
+.project__cell-text {
+  padding: 0.5rem 0.25rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #111;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* push text to the bottom of the cell */
+  align-items: flex-start;    /* left-align text within cell */
+  grid-column: span 3;
+}
+
+@media (max-width: 900px) {
+  .project__layout {
+    grid-template-columns: 1fr;
+  }
+  .project__layout .full-width {
+    grid-column: auto;
+  }
 }
 
 @media (max-width: 900px) {
