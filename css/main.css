@@ -1,19 +1,20 @@
 @font-face {
- font-family: 'Futura';
- src: url('../assets/fonts/futura.woff') format('woff'),
-      url('../assets/fonts/futura.woff2') format('woff2');
- font-weight: normal;
- font-style: normal;
+  font-family: 'Futura';
+  src: url('../assets/fonts/futura.woff') format('woff'),
+    url('../assets/fonts/futura.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
- font-family: 'Futura', 'Calibri', Arial, sans-serif;
- color: #111;
- background: #fff;
+  font-family: 'Futura', 'Calibri', Arial, sans-serif;
+  color: #111;
+  background: #fff;
 }
 
 :root {
-  --nav-gap: 1.0rem; /* adjust this to change vertical spacing between nav items */
+  --nav-gap: 1.0rem;
+  /* adjust this to change vertical spacing between nav items */
 }
 
 /* =======================
@@ -29,7 +30,8 @@ Sidebar Navigation (persistent)
   z-index: 100;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* keep nav at the top */
+  justify-content: flex-start;
+  /* keep nav at the top */
   box-sizing: border-box;
 }
 
@@ -58,15 +60,18 @@ Sidebar Navigation (persistent)
 .nav__link {
   font-size: 0.95rem;
   letter-spacing: 0.05em;
-  color: #888; /* default: grey */
-  text-decoration: none; /* no underline */
+  color: #888;
+  /* default: grey */
+  text-decoration: none;
+  /* no underline */
   padding: calc(var(--nav-gap) * 0.35) 0;
 }
 
 .nav__link:hover,
 .nav__link:focus {
   text-decoration: none;
-  color: #111; /* on hover/focus show darker color */
+  color: #111;
+  /* on hover/focus show darker color */
 }
 
 /* mobile menu toggle (hidden by default) */
@@ -87,7 +92,8 @@ Sidebar Navigation (persistent)
 /* Active nav link */
 .nav__link.active {
   font-weight: 700;
-  color: #111; /* active page is black/darker */
+  color: #111;
+  /* active page is black/darker */
 }
 
 /* =======================
@@ -98,7 +104,8 @@ About
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* center vertically on larger screens */
+  justify-content: center;
+  /* center vertically on larger screens */
   padding: 3rem 2rem;
   box-sizing: border-box;
 }
@@ -117,9 +124,9 @@ About
 }
 
 .about__content {
- max-width: 680px;
- font-size: 1.4rem;
- line-height: 1.6;
+  max-width: 680px;
+  font-size: 1.4rem;
+  line-height: 1.6;
 }
 
 /* About page layout */
@@ -152,8 +159,10 @@ About
   line-height: 1.6;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* bottom align content inside the bio cell */
-  align-items: flex-start;    /* left align text */
+  justify-content: flex-end;
+  /* bottom align content inside the bio cell */
+  align-items: flex-start;
+  /* left align text */
   text-align: left;
 }
 
@@ -161,25 +170,25 @@ About
 Work
 ======================= */
 .work {
- padding: 6rem 3rem;
+  padding: 6rem 3rem;
 }
 
 .work__grid {
- display: grid;
- grid-template-columns: repeat(3, 1fr);
- gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
 }
 
 .work-item {
- position: relative;
- overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .work-item img {
- width: 100%;
- height: 100%;
- object-fit: cover;
- transition: transform 0.8s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
 }
 
 .work-item__overlay {
@@ -189,7 +198,7 @@ Work
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(255,255,255,0.50);
+  background: rgba(255, 255, 255, 0.50);
   color: #111;
   text-align: center;
   box-shadow: none;
@@ -198,7 +207,7 @@ Work
   pointer-events: none;
   /* stabilize transform and animate both opacity and transform to avoid
      showing intermediate positioned fragments when overlays appear */
-  transform: translate(0,0) scale(1);
+  transform: translate(0, 0) scale(1);
   transition: opacity 0.18s ease, transform 0.18s ease;
   will-change: opacity, transform;
 }
@@ -207,7 +216,8 @@ Work
   margin: 1rem 0;
   font-size: 1.7rem;
   letter-spacing: 0.12em;
-  max-width: 10ch; /* adjust this to force a break after the first word */
+  max-width: 10ch;
+  /* adjust this to force a break after the first word */
   display: inline-block;
   white-space: normal;
   overflow-wrap: break-word;
@@ -237,7 +247,7 @@ Work
 .work-item:focus .work-item__overlay {
   opacity: 1;
   /* keep overlay in place (no shifting). we only animate opacity/scale */
-  transform: translate(0,0) scale(1);
+  transform: translate(0, 0) scale(1);
   pointer-events: auto;
 }
 
@@ -245,9 +255,9 @@ Work
 Responsive
 ======================= */
 @media (max-width: 900px) {
- .work__grid {
-   grid-template-columns: repeat(2, 1fr);
- }
+  .work__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Collapse sidebar on small screens */
@@ -257,7 +267,7 @@ Responsive
     width: 100%;
     height: auto;
     padding: 0.75rem 1rem;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -276,7 +286,7 @@ Responsive
     top: 3.6rem;
     background: #fff;
     padding: 0.5rem 0.75rem;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
     border-radius: 2px;
     max-width: 220px;
     width: auto;
@@ -297,7 +307,8 @@ Responsive
   body.nav-open .nav {
     display: flex;
     flex-direction: column;
-    gap: 0.9rem; /* increased vertical spacing between menu items when open */
+    gap: 0.9rem;
+    /* increased vertical spacing between menu items when open */
   }
 
   /* Logo centered on mobile */
@@ -322,11 +333,15 @@ Responsive
 
 /* Reduce logo gradually on medium widths */
 @media (max-width: 1100px) {
-  .sidebar__brand img { max-width: 120px; }
+  .sidebar__brand img {
+    max-width: 120px;
+  }
 }
 
 @media (max-width: 950px) {
-  .sidebar__brand img { max-width: 100px; }
+  .sidebar__brand img {
+    max-width: 100px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -353,14 +368,15 @@ Responsive
 }
 
 @media (max-width: 600px) {
- .work__grid {
-   grid-template-columns: 1fr;
-   gap: 0rem; /* reduced vertical spacing between thumbnails on mobile */
- }
+  .work__grid {
+    grid-template-columns: 1fr;
+    gap: 0rem;
+    /* reduced vertical spacing between thumbnails on mobile */
+  }
 
- .about__content {
-   font-size: 1.1rem;
- }
+  .about__content {
+    font-size: 1.1rem;
+  }
 }
 
 /* =======================
@@ -394,39 +410,6 @@ Project pages
   margin-top: 0.25rem;
 }
 
-.project__hero {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-  margin: 2rem 0;
-}
-
-.project__hero img {
-  width: 520px;
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.project__summary {
-  max-width: 360px;
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.project__gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-top: 2.5rem;
-}
-
-.project__gallery img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 /* Flexible project layout: mix full-width media, 2-column grid and text cells */
 
 .project__layout {
@@ -435,7 +418,7 @@ Project pages
      while allowing finer control for 3-up rows. Default image spans 3 cols
      (equivalent to the previous 1 of 2). */
   grid-template-columns: repeat(6, 1fr);
-  gap: 1.5rem;
+  gap: 1.5rem 0;
   margin-top: 2.5rem;
   align-items: stretch;
   grid-auto-rows: auto;
@@ -452,23 +435,12 @@ Project pages
 /* helper: make three adjacent images fit in a single row.
    Add `three` to the `media` element: <img class="media three" ...> */
 .project__layout .media.three {
-  grid-column: span 2; /* three items x 2 = 6 columns */
+  grid-column: span 2;
+  /* three items x 2 = 6 columns */
 }
 
 /* full-width media (keep existing behaviour) */
 .project__layout .media.full-width {
-  grid-column: 1 / -1;
-}
-
-/* Each grid cell can be a wrapper to allow vertical alignment */
-.project__cell {
-  display: flex;
-  flex-direction: column;
-  min-height: 0; /* allow children to shrink properly */
-}
-
-/* Full-width wrapper - spans both columns */
-.project__cell.full-width {
   grid-column: 1 / -1;
 }
 
@@ -478,39 +450,30 @@ Project pages
   display: block;
 }
 
-.project__cell-text {
+.project__layout .text {
   padding: 0.5rem 0.25rem;
   font-size: 0.95rem;
   line-height: 1.6;
   color: #111;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* push text to the bottom of the cell */
-  align-items: flex-start;    /* left-align text within cell */
+  justify-content: flex-end;
+  /* push text to the bottom of the cell */
+  align-items: flex-start;
+  /* left-align text within cell */
   grid-column: span 3;
 }
 
+
+
 @media (max-width: 900px) {
+
   .project__layout {
     grid-template-columns: 1fr;
   }
-  .project__layout .full-width {
+
+  /* .project__layout .full-width {
     grid-column: auto;
-  }
-}
+  } */
 
-@media (max-width: 900px) {
-  .project__hero {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .project__summary {
-    max-width: 100%;
-  }
-
-  .project__gallery {
-    grid-template-columns: 1fr;
-  }
 }
